@@ -18,7 +18,8 @@ jobs:
           key: ${{ secrets.HETZNER_SSH_KEY }}
           script: |
             cd /var/www/friendwhocodes
-            git pull origin main
+            git fetch origin main
+            git reset --hard origin/main
             npm install
             npm run build
             pm2 restart friendwhocodes || pm2 start npm --name "friendwhocodes" -- start
