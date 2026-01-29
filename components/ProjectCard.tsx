@@ -12,11 +12,11 @@ interface ProjectCardProps {
 export function ProjectCard({ title, description, tech, github, demo, status }: ProjectCardProps) {
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6 hover:shadow-lg transition-shadow">
-      <div className="flex items-start justify-between mb-2">
-        <h3 className="text-lg font-semibold">{title}</h3>
+      <div className="flex items-start justify-between gap-2 mb-2">
+        <h3 className="text-lg font-semibold min-w-0">{title}</h3>
         {status && (
           <span
-            className={`text-xs px-2 py-1 rounded-full ${
+            className={`text-xs px-2 py-1 rounded-full whitespace-nowrap shrink-0 ${
               status === "live"
                 ? "bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300"
                 : "bg-yellow-100 dark:bg-yellow-900 text-yellow-700 dark:text-yellow-300"
