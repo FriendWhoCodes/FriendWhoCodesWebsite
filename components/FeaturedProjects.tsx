@@ -2,27 +2,26 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { ProjectCard } from "./ProjectCard";
 
-// TODO: Move to data file or CMS
 const featuredProjects = [
   {
-    title: "Project 1",
-    description: "Description of project 1",
+    title: "Man of Wisdom - Goal Setter",
+    description: "Set and track your 2026 goals with this free goal-setting tool.",
     tech: ["Next.js", "TypeScript", "Tailwind"],
-    github: "https://github.com/FriendWhoCodes/project1",
-    demo: "https://project1.com",
+    demo: "https://goals.manofwisdom.co/",
+    status: "live" as const,
   },
   {
-    title: "Project 2",
-    description: "Description of project 2",
-    tech: ["React", "Node.js", "PostgreSQL"],
-    github: "https://github.com/FriendWhoCodes/project2",
+    title: "AstroFacts",
+    description: "Discover fascinating facts about the universe, planets, and space.",
+    tech: ["Android", "Kotlin"],
+    demo: "https://play.google.com/store/apps/details?id=com.friendwhocodes.astrofacts",
+    status: "live" as const,
   },
   {
-    title: "Project 3",
-    description: "Description of project 3",
-    tech: ["Python", "FastAPI", "Docker"],
-    github: "https://github.com/FriendWhoCodes/project3",
-    demo: "https://project3.com",
+    title: "Focus Empire",
+    description: "Build your focus empire one session at a time. Gamified productivity.",
+    tech: ["Android", "Kotlin"],
+    status: "upcoming" as const,
   },
 ];
 
