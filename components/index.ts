@@ -1,0 +1,9 @@
+export { Header } from "./Header";
+export { Footer } from "./Footer";
+export { ThemeToggle } from "./ThemeToggle";
+export { Hero } from "./Hero";
+export { FeaturedProjects } from "./FeaturedProjects";
+export { ProjectCard } from "./ProjectCard";
+export { About } from "./About";
+export { Portfolio } from "./Portfolio";
+export { Contact } from "./Contact";
