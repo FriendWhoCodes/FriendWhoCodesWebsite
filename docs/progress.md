@@ -31,10 +31,10 @@
 ## Pending Tasks
 
 ### Infrastructure
-- [ ] Configure GitHub secrets for deployment
-- [ ] Clone repo to `/var/www/friendwhocodes` on Hetzner
-- [ ] Register app with PM2
-- [ ] Update Nginx Proxy Manager routing
+- [x] Configure GitHub secrets for deployment
+- [x] Clone repo to `/var/www/friendwhocodes` on Hetzner
+- [x] Register app with PM2 (port 3005)
+- [ ] Update Nginx Proxy Manager routing (friendwhocodes.com → localhost:3005)
 
 ### Content (Awaiting Resume)
 - [ ] Update Hero section with bio/tagline
