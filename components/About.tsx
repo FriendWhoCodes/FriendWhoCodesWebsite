@@ -7,13 +7,14 @@ export function About() {
         <div className="grid md:grid-cols-3 gap-12">
           <div className="md:col-span-2 space-y-6">
             <p className="text-lg text-gray-600 dark:text-gray-300">
-              {/* TODO: Add bio from resume */}
-              Hello! I&apos;m Alok Sharma, a software developer based in [Location].
+              Hello! I&apos;m Alok Sharma, a software developer based in India,
+              working remotely to build great products.
             </p>
             <p className="text-gray-600 dark:text-gray-300">
-              {/* TODO: Add more details */}
               I specialize in building web applications and have experience with
-              various technologies across the stack.
+              various technologies across the stack. I&apos;m passionate about
+              creating clean, efficient code and delivering solutions that make
+              a real impact.
             </p>
 
             <div className="pt-4">
