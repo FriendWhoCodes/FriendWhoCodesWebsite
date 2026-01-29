@@ -6,13 +6,15 @@ export function Hero() {
     <section className="py-20 md:py-32">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl">
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
+          <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-4">
             Hi, I&apos;m{" "}
             <span className="text-blue-600 dark:text-blue-400">Alok Sharma</span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8">
-            {/* TODO: Add tagline/intro */}
-            Software Developer passionate about building great products.
+          <p className="text-2xl md:text-3xl font-medium text-gray-700 dark:text-gray-200 mb-4">
+            Your Friend Who Codes
+          </p>
+          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-8">
+            Software Developer based in India, working remotely to build great products.
           </p>
           <div className="flex flex-wrap gap-4">
             <Link

@@ -1,6 +1,6 @@
 "use client";
 
-import { Mail, Github, Linkedin, MapPin } from "lucide-react";
+import { Mail, Github, Linkedin, MapPin, Twitter, Instagram, Facebook, Youtube } from "lucide-react";
 import { useState } from "react";
 
 export function Contact() {
@@ -105,33 +105,33 @@ export function Contact() {
                 </a>
                 <div className="flex items-center gap-3 text-gray-600 dark:text-gray-300">
                   <MapPin size={20} />
-                  {/* TODO: Add location */}
-                  Location, Country
+                  India (Working Remotely)
                 </div>
               </div>
             </div>
 
             <div>
               <h2 className="text-xl font-semibold mb-4">Social</h2>
-              <div className="flex gap-4">
-                <a
-                  href="https://github.com/FriendWhoCodes"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-3 border border-gray-300 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
-                  aria-label="GitHub"
-                >
-                  <Github size={24} />
-                </a>
-                <a
-                  href="https://linkedin.com/in/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-3 border border-gray-300 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
-                  aria-label="LinkedIn"
-                >
-                  <Linkedin size={24} />
-                </a>
+              <div className="flex flex-wrap gap-3">
+                {[
+                  { href: "https://x.com/FriendWhoCodes", icon: Twitter, label: "X (Twitter)" },
+                  { href: "https://github.com/FriendWhoCodes", icon: Github, label: "GitHub" },
+                  { href: "https://youtube.com/@FriendWhoCodes", icon: Youtube, label: "YouTube" },
+                  { href: "https://instagram.com/FriendWhoCodes", icon: Instagram, label: "Instagram" },
+                  { href: "https://linkedin.com/company/friendwhocodes", icon: Linkedin, label: "LinkedIn" },
+                  { href: "https://facebook.com/FriendWhoCodes", icon: Facebook, label: "Facebook" },
+                ].map(({ href, icon: Icon, label }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-3 border border-gray-300 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                    aria-label={label}
+                  >
+                    <Icon size={24} />
+                  </a>
+                ))}
               </div>
             </div>
           </div>
