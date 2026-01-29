@@ -3,11 +3,17 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  color-scheme: light;
 }
 
 .dark {
   --background: #0a0a0a;
   --foreground: #ededed;
+  color-scheme: dark;
+}
+
+html {
+  background: var(--background);
 }
 
 body {
@@ -25,4 +31,10 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+/* Blog content styles */
+.blog-content {
+  font-size: 1.125rem;
+  line-height: 1.75;
 }
