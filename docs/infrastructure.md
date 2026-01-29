@@ -30,7 +30,7 @@ ssh hetzner
 | lyricsflow | /var/www/LyricsFlow | 3001 | online |
 | goal-setter | /var/www/Journal/goal-setter | - | online |
 | time-views | /var/www/Journal/time-views | - | online |
-| **friendwhocodes** | /var/www/friendwhocodes | 3003 | pending |
+| **friendwhocodes** | /var/www/friendwhocodes | 3005 | online |
 
 ---
 
@@ -55,7 +55,7 @@ pm2 save
 ### 3. Configure Nginx Proxy Manager
 - Add new Proxy Host
 - Domain: friendwhocodes.com
-- Forward to: localhost:3003
+- Forward to: localhost:3005
 - Enable SSL with Let's Encrypt
 
 ### 4. GitHub Secrets
