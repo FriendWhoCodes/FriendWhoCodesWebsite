@@ -1,12 +1,12 @@
 import { Github, Linkedin, Mail, Twitter, Instagram, Facebook, Youtube } from "lucide-react";
 
 const socialLinks = [
-  { href: "https://github.com/FriendWhoCodes", icon: Github, label: "GitHub" },
-  { href: "https://linkedin.com/company/friendwhocodes", icon: Linkedin, label: "LinkedIn" },
   { href: "https://x.com/FriendWhoCodes", icon: Twitter, label: "X (Twitter)" },
-  { href: "https://instagram.com/FriendWhoCodes", icon: Instagram, label: "Instagram" },
-  { href: "https://facebook.com/FriendWhoCodes", icon: Facebook, label: "Facebook" },
+  { href: "https://github.com/FriendWhoCodes", icon: Github, label: "GitHub" },
   { href: "https://youtube.com/@FriendWhoCodes", icon: Youtube, label: "YouTube" },
+  { href: "https://instagram.com/FriendWhoCodes", icon: Instagram, label: "Instagram" },
+  { href: "https://linkedin.com/company/friendwhocodes", icon: Linkedin, label: "LinkedIn" },
+  { href: "https://facebook.com/FriendWhoCodes", icon: Facebook, label: "Facebook" },
 ];
 
 export function Footer() {
