@@ -3,23 +3,126 @@
 import { Mail, Github, Linkedin, MapPin, Twitter, Instagram, Facebook, Youtube } from "lucide-react";
 import { useState } from "react";
 
+const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID;
+
+// Input constraints
+const MAX_NAME_LENGTH = 100;
+const MAX_EMAIL_LENGTH = 254;
+const MAX_MESSAGE_LENGTH = 5000;
+const MIN_MESSAGE_LENGTH = 10;
+
+// Basic email validation regex
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+// Sanitize input: trim whitespace and limit length
+function sanitize(input: string, maxLength: number): string {
+  return input.trim().slice(0, maxLength);
+}
+
+// Strip potentially dangerous characters (basic XSS prevention for display)
+function stripHtml(input: string): string {
+  return input.replace(/[<>]/g, "");
+}
+
 export function Contact() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
+  const [honeypot, setHoneypot] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const validateForm = (): string | null => {
+    const name = sanitize(formData.name, MAX_NAME_LENGTH);
+    const email = sanitize(formData.email, MAX_EMAIL_LENGTH);
+    const message = sanitize(formData.message, MAX_MESSAGE_LENGTH);
+
+    if (!name || name.length < 2) {
+      return "Please enter your name (at least 2 characters).";
+    }
+
+    if (!email || !EMAIL_REGEX.test(email)) {
+      return "Please enter a valid email address.";
+    }
+
+    if (!message || message.length < MIN_MESSAGE_LENGTH) {
+      return `Please enter a message (at least ${MIN_MESSAGE_LENGTH} characters).`;
+    }
+
+    return null;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrorMessage("");
+
+    // Honeypot check - if filled, it's likely a bot
+    if (honeypot) {
+      setStatus("sent");
+      return;
+    }
+
+    // Validate inputs
+    const validationError = validateForm();
+    if (validationError) {
+      setErrorMessage(validationError);
+      setStatus("error");
+      return;
+    }
+
+    // Check if Formspree is configured
+    if (!FORMSPREE_ID) {
+      setErrorMessage("Contact form is not configured. Please email directly.");
+      setStatus("error");
+      return;
+    }
+
     setStatus("sending");
 
-    // TODO: Implement form submission (e.g., Formspree, EmailJS, or custom API)
-    // For now, just simulate a submission
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    setStatus("sent");
-    setFormData({ name: "", email: "", message: "" });
+    try {
+      // Sanitize all inputs before sending
+      const sanitizedData = {
+        name: stripHtml(sanitize(formData.name, MAX_NAME_LENGTH)),
+        email: sanitize(formData.email, MAX_EMAIL_LENGTH),
+        message: stripHtml(sanitize(formData.message, MAX_MESSAGE_LENGTH)),
+      };
+
+      const response = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify(sanitizedData),
+      });
+
+      if (response.ok) {
+        setStatus("sent");
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        const data = await response.json();
+        if (data.errors) {
+          setErrorMessage(data.errors.map((err: { message: string }) => err.message).join(", "));
+        } else {
+          setErrorMessage("Failed to send message. Please try again.");
+        }
+        setStatus("error");
+      }
+    } catch {
+      setErrorMessage("Network error. Please check your connection and try again.");
+      setStatus("error");
+    }
+  };
+
+  const handleInputChange = (field: keyof typeof formData, value: string) => {
+    // Reset error state when user starts typing
+    if (status === "error") {
+      setStatus("idle");
+      setErrorMessage("");
+    }
+    setFormData({ ...formData, [field]: value });
   };
 
   return (
@@ -33,6 +136,17 @@ export function Contact() {
         <div className="grid md:grid-cols-2 gap-12">
           <div>
             <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Honeypot field - hidden from users, catches bots */}
+              <input
+                type="text"
+                name="_gotcha"
+                value={honeypot}
+                onChange={(e) => setHoneypot(e.target.value)}
+                style={{ display: "none" }}
+                tabIndex={-1}
+                autoComplete="off"
+              />
+
               <div>
                 <label htmlFor="name" className="block text-sm font-medium mb-2">
                   Name
@@ -40,9 +154,13 @@ export function Contact() {
                 <input
                   type="text"
                   id="name"
+                  name="name"
                   value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  onChange={(e) => handleInputChange("name", e.target.value)}
                   required
+                  maxLength={MAX_NAME_LENGTH}
+                  minLength={2}
+                  autoComplete="name"
                   className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-shadow"
                 />
               </div>
@@ -53,9 +171,12 @@ export function Contact() {
                 <input
                   type="email"
                   id="email"
+                  name="email"
                   value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  onChange={(e) => handleInputChange("email", e.target.value)}
                   required
+                  maxLength={MAX_EMAIL_LENGTH}
+                  autoComplete="email"
                   className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-shadow"
                 />
               </div>
@@ -65,12 +186,18 @@ export function Contact() {
                 </label>
                 <textarea
                   id="message"
+                  name="message"
                   rows={5}
                   value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  onChange={(e) => handleInputChange("message", e.target.value)}
                   required
+                  maxLength={MAX_MESSAGE_LENGTH}
+                  minLength={MIN_MESSAGE_LENGTH}
                   className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-shadow resize-none"
                 />
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                  {formData.message.length}/{MAX_MESSAGE_LENGTH} characters
+                </p>
               </div>
               <button
                 type="submit"
@@ -81,12 +208,12 @@ export function Contact() {
               </button>
               {status === "sent" && (
                 <p className="text-green-600 dark:text-green-400 text-sm">
-                  Message sent successfully!
+                  Message sent successfully! I&apos;ll get back to you soon.
                 </p>
               )}
               {status === "error" && (
                 <p className="text-red-600 dark:text-red-400 text-sm">
-                  Failed to send message. Please try again.
+                  {errorMessage || "Failed to send message. Please try again."}
                 </p>
               )}
             </form>
