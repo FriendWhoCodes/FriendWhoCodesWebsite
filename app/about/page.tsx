@@ -1,7 +1,7 @@
 import { About } from "@/components/About";
 
 export const metadata = {
-  title: "About | Alok Sharma",
+  title: "About",
   description: "Learn more about Alok Sharma - Software Developer",
 };
 

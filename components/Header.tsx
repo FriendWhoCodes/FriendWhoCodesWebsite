@@ -7,9 +7,8 @@ import { useState } from "react";
 import { ThemeToggle } from "./ThemeToggle";
 
 const navItems = [
-  { href: "/", label: "Home" },
   { href: "/about", label: "About" },
-  { href: "/portfolio", label: "Portfolio" },
+  { href: "/portfolio", label: "Work" },
   { href: "/products", label: "Products" },
   { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact" },
@@ -20,28 +19,34 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="border-b border-gray-200 dark:border-gray-800">
+    <header className="sticky top-0 z-50 border-b border-line bg-paper/85 backdrop-blur-md">
       <nav className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
-          <Link href="/" className="text-xl font-bold">
-            FriendWhoCodes
+          <Link
+            href="/"
+            className="font-mono text-sm tracking-tight lowercase"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            friendwhocodes<span className="text-accent">_</span>
           </Link>
 
           {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-8">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`text-sm transition-colors hover:text-gray-600 dark:hover:text-gray-300 ${
-                  pathname === item.href
-                    ? "text-black dark:text-white font-medium"
-                    : "text-gray-500 dark:text-gray-400"
-                }`}
-              >
-                {item.label}
-              </Link>
-            ))}
+          <div className="hidden md:flex items-center gap-7">
+            {navItems.map((item) => {
+              const active = pathname === item.href || pathname.startsWith(item.href + "/");
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`font-mono text-[11px] uppercase tracking-[0.18em] transition-colors ${
+                    active ? "text-accent" : "text-muted hover:text-ink"
+                  }`}
+                >
+                  {active && <span aria-hidden>* </span>}
+                  {item.label}
+                </Link>
+              );
+            })}
             <ThemeToggle />
           </div>
 
@@ -50,31 +55,32 @@ export function Header() {
             <ThemeToggle />
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2"
+              className="p-2 text-ink"
               aria-label="Toggle menu"
             >
-              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
           </div>
         </div>
 
         {/* Mobile nav */}
         {mobileMenuOpen && (
-          <div className="md:hidden pb-4">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className={`block py-2 text-sm ${
-                  pathname === item.href
-                    ? "text-black dark:text-white font-medium"
-                    : "text-gray-500 dark:text-gray-400"
-                }`}
-              >
-                {item.label}
-              </Link>
-            ))}
+          <div className="md:hidden pb-5 pt-1 border-t border-line">
+            {navItems.map((item) => {
+              const active = pathname === item.href || pathname.startsWith(item.href + "/");
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`block py-2.5 font-mono text-xs uppercase tracking-[0.18em] ${
+                    active ? "text-accent" : "text-muted"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
           </div>
         )}
       </nav>

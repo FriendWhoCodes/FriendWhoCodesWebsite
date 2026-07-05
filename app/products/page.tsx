@@ -1,71 +1,77 @@
-import { ShoppingBag } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 
 export const metadata = {
-  title: 'Products | Alok Sharma',
-  description: 'Digital products - cheatsheets, roadmaps, and bundles for developers.',
+  title: 'Products',
+  description: 'Digital products for developers — what is shipped and what is in the works.',
 };
 
-const products = [
+const pipeline = [
   {
-    title: "Coming Soon",
-    description: "Exciting digital products are on the way! Stay tuned for developer cheatsheets, roadmaps, and learning bundles.",
-    price: null,
-    category: "Upcoming",
-    available: false,
+    title: 'Focus Empire',
+    description: 'Gamified productivity for Android. In active development.',
+    stage: 'In development',
+  },
+  {
+    title: 'Developer resources',
+    description: 'Cheatsheets, roadmaps, and learning bundles.',
+    stage: 'Planned',
   },
 ];
 
 export default function ProductsPage() {
   return (
-    <section className="py-16">
+    <section className="py-16 md:py-24">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-3xl md:text-4xl font-bold mb-4">Products</h1>
-        <p className="text-gray-600 dark:text-gray-300 mb-8">
-          Digital resources to help you level up your skills - cheatsheets, roadmaps, and bundles.
+        <p className="rise font-mono text-[11px] uppercase tracking-[0.22em] text-muted mb-4">
+          Products
+        </p>
+        <h1 className="rise rise-1 font-display text-4xl md:text-6xl font-medium tracking-tight mb-4">
+          Things you&apos;ll be able to buy.
+        </h1>
+        <p className="rise rise-2 text-muted text-lg max-w-xl mb-14 leading-relaxed">
+          Nothing is for sale here yet — I&apos;d rather ship late than ship
+          junk. Here&apos;s what&apos;s in the pipeline.
         </p>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {products.map((product, index) => (
+        <div className="rise rise-3 border-t border-line mb-16">
+          {pipeline.map((item) => (
             <div
-              key={index}
-              className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6 hover:shadow-lg transition-shadow"
+              key={item.title}
+              className="grid md:grid-cols-[1fr_auto] gap-3 md:gap-8 items-baseline py-8 border-b border-line px-1 md:px-4"
             >
-              <div className="flex items-center justify-center w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg mb-4">
-                <ShoppingBag className="text-blue-600 dark:text-blue-400" size={24} />
+              <div>
+                <h2 className="font-display text-2xl md:text-3xl font-medium tracking-tight mb-2">
+                  {item.title}
+                </h2>
+                <p className="text-muted leading-relaxed max-w-xl">
+                  {item.description}
+                </p>
               </div>
-              <span className="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded-full">
-                {product.category}
+              <span className="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.15em] text-muted">
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-line-strong" />
+                {item.stage}
               </span>
-              <h3 className="text-lg font-semibold mt-3 mb-2">{product.title}</h3>
-              <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
-                {product.description}
-              </p>
-              {product.available ? (
-                <button className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                  {product.price ? `Buy - ${product.price}` : 'Get it'}
-                </button>
-              ) : (
-                <button
-                  disabled
-                  className="w-full px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400 rounded-lg cursor-not-allowed"
-                >
-                  Coming Soon
-                </button>
-              )}
             </div>
           ))}
         </div>
 
-        <div className="mt-16 p-8 bg-gray-50 dark:bg-gray-900/50 rounded-lg text-center">
-          <h2 className="text-2xl font-bold mb-4">Want to be notified?</h2>
-          <p className="text-gray-600 dark:text-gray-300 mb-6">
-            Get notified when new products are available. No spam, just updates.
+        <div className="rise rise-4 border border-line bg-surface rounded-xl p-8 md:p-10">
+          <h2 className="font-display text-2xl md:text-3xl font-medium tracking-tight mb-3">
+            Want to hear when something ships?
+          </h2>
+          <p className="text-muted mb-6 max-w-lg leading-relaxed">
+            Drop me a line and I&apos;ll let you know. No list, no spam — just
+            an email from me when it&apos;s real.
           </p>
           <a
             href="/contact"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            className="group inline-flex items-center gap-2 px-6 py-3 bg-accent text-accent-ink font-mono text-sm uppercase tracking-[0.12em] rounded-full transition-transform hover:-translate-y-0.5"
           >
-            Contact Me
+            Contact me
+            <ArrowUpRight
+              size={16}
+              className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            />
           </a>
         </div>
       </div>

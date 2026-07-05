@@ -1,7 +1,7 @@
 import { Contact } from "@/components/Contact";
 
 export const metadata = {
-  title: "Contact | Alok Sharma",
+  title: "Contact",
   description: "Get in touch with Alok Sharma",
 };
 

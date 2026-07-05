@@ -1,7 +1,7 @@
 import { Portfolio } from "@/components/Portfolio";
 
 export const metadata = {
-  title: "Portfolio | Alok Sharma",
+  title: "Work",
   description: "Projects and work by Alok Sharma",
 };
 

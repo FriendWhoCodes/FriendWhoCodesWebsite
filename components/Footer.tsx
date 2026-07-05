@@ -1,4 +1,5 @@
-import { Github, Linkedin, Mail, Twitter, Instagram, Facebook, Youtube } from "lucide-react";
+import Link from "next/link";
+import { Github, Linkedin, Mail, Twitter, Instagram, Facebook, Youtube, ArrowUpRight } from "lucide-react";
 
 const socialLinks = [
   { href: "https://x.com/FriendWhoCodes", icon: Twitter, label: "X (Twitter)" },
@@ -11,11 +12,28 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-gray-200 dark:border-gray-800 py-8">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-gray-500 dark:text-gray-400">
-            &copy; {new Date().getFullYear()} Alok Sharma. All rights reserved.
+    <footer className="border-t border-line mt-16">
+      {/* Big invitation */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
+        <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted mb-4">
+          Next step
+        </p>
+        <Link href="/contact" className="group inline-block">
+          <span className="font-display text-4xl md:text-6xl font-medium tracking-tight text-balance group-hover:text-accent transition-colors">
+            Let&apos;s build something
+            <ArrowUpRight
+              className="inline-block ml-2 mb-2 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
+              size={32}
+            />
+          </span>
+        </Link>
+      </div>
+
+      <div className="border-t border-line">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="font-mono text-xs text-muted">
+            © {new Date().getFullYear()} Alok Sharma · friendwhocodes
+            <span className="text-accent">_</span>
           </p>
           <div className="flex items-center gap-4">
             {socialLinks.map(({ href, icon: Icon, label }) => (
@@ -24,18 +42,18 @@ export function Footer() {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
+                className="text-muted hover:text-accent transition-colors"
                 aria-label={label}
               >
-                <Icon size={20} />
+                <Icon size={18} />
               </a>
             ))}
             <a
               href="mailto:contact@friendwhocodes.com"
-              className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
+              className="text-muted hover:text-accent transition-colors"
               aria-label="Email"
             >
-              <Mail size={20} />
+              <Mail size={18} />
             </a>
           </div>
         </div>

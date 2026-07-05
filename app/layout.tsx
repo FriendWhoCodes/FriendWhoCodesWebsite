@@ -1,12 +1,47 @@
 import type { Metadata } from "next";
+import { Fraunces, Spline_Sans, Spline_Sans_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
+const heading = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-heading",
+  axes: ["opsz", "SOFT", "WONK"],
+});
+
+const body = Spline_Sans({
+  subsets: ["latin"],
+  variable: "--font-body",
+});
+
+const code = Spline_Sans_Mono({
+  subsets: ["latin"],
+  variable: "--font-code",
+});
+
 export const metadata: Metadata = {
-  title: "Alok Sharma | Friend Who Codes",
-  description: "Personal portfolio of Alok Sharma - Software Developer",
+  metadataBase: new URL("https://friendwhocodes.com"),
+  title: {
+    default: "Alok Sharma | Friend Who Codes",
+    template: "%s | Friend Who Codes",
+  },
+  description:
+    "Alok Sharma — software engineer in India. I build web apps, Android apps, and AI-assisted tools, and write about how they get made.",
+  openGraph: {
+    title: "Alok Sharma | Friend Who Codes",
+    description:
+      "Software engineer in India. Web apps, Android apps, and AI-assisted tools.",
+    url: "https://friendwhocodes.com",
+    siteName: "Friend Who Codes",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@FriendWhoCodes",
+    creator: "@FriendWhoCodes",
+  },
 };
 
 export default function RootLayout({
@@ -15,8 +50,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className="font-sans antialiased min-h-screen flex flex-col">
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${heading.variable} ${body.variable} ${code.variable}`}
+    >
+      <body className="font-sans antialiased min-h-screen flex flex-col bg-paper text-ink">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Header />
           <main className="flex-1">{children}</main>

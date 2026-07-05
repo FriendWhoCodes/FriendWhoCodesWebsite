@@ -1,57 +1,64 @@
-import { Mail, Github, Linkedin, MapPin, Twitter, Instagram, Facebook, Youtube } from "lucide-react";
+import { Github, Linkedin, Twitter, Instagram, Facebook, Youtube, ArrowUpRight } from "lucide-react";
+
+const socials = [
+  { href: "https://x.com/FriendWhoCodes", icon: Twitter, label: "X (Twitter)", handle: "@FriendWhoCodes" },
+  { href: "https://github.com/FriendWhoCodes", icon: Github, label: "GitHub", handle: "FriendWhoCodes" },
+  { href: "https://youtube.com/@FriendWhoCodes", icon: Youtube, label: "YouTube", handle: "@FriendWhoCodes" },
+  { href: "https://instagram.com/FriendWhoCodes", icon: Instagram, label: "Instagram", handle: "@FriendWhoCodes" },
+  { href: "https://linkedin.com/company/friendwhocodes", icon: Linkedin, label: "LinkedIn", handle: "friendwhocodes" },
+  { href: "https://facebook.com/FriendWhoCodes", icon: Facebook, label: "Facebook", handle: "FriendWhoCodes" },
+];
 
 export function Contact() {
   return (
-    <section className="py-16">
+    <section className="py-16 md:py-24">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-3xl md:text-4xl font-bold mb-4">Get in Touch</h1>
-        <p className="text-gray-600 dark:text-gray-300 mb-8">
-          Have a question or want to work together? Feel free to reach out!
+        <p className="rise font-mono text-[11px] uppercase tracking-[0.22em] text-muted mb-4">
+          Contact
+        </p>
+        <h1 className="rise rise-1 font-display text-4xl md:text-6xl font-medium tracking-tight mb-6">
+          Say hello.
+        </h1>
+        <p className="rise rise-2 text-muted text-lg max-w-xl mb-14 leading-relaxed">
+          Have a question, an idea, or want to work together? One email away —
+          I&apos;m in India, working remotely.
         </p>
 
-        <div className="max-w-md">
-          <div className="space-y-8">
-            <div>
-              <h2 className="text-xl font-semibold mb-4">Contact Info</h2>
-              <div className="space-y-4">
-                <a
-                  href="mailto:contact@friendwhocodes.com"
-                  className="flex items-center gap-3 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                >
-                  <Mail size={20} />
-                  contact@friendwhocodes.com
-                </a>
-                <div className="flex items-center gap-3 text-gray-600 dark:text-gray-300">
-                  <MapPin size={20} />
-                  India (Working Remotely)
-                </div>
-              </div>
-            </div>
+        <a
+          href="mailto:contact@friendwhocodes.com"
+          className="rise rise-3 group inline-block mb-20"
+        >
+          <span className="font-display text-[clamp(1.4rem,4.5vw,3.2rem)] font-medium tracking-tight border-b-2 border-line group-hover:border-accent group-hover:text-accent transition-colors break-all">
+            contact@friendwhocodes.com
+          </span>
+        </a>
 
-            <div>
-              <h2 className="text-xl font-semibold mb-4">Social</h2>
-              <div className="flex flex-wrap gap-3">
-                {[
-                  { href: "https://x.com/FriendWhoCodes", icon: Twitter, label: "X (Twitter)" },
-                  { href: "https://github.com/FriendWhoCodes", icon: Github, label: "GitHub" },
-                  { href: "https://youtube.com/@FriendWhoCodes", icon: Youtube, label: "YouTube" },
-                  { href: "https://instagram.com/FriendWhoCodes", icon: Instagram, label: "Instagram" },
-                  { href: "https://linkedin.com/company/friendwhocodes", icon: Linkedin, label: "LinkedIn" },
-                  { href: "https://facebook.com/FriendWhoCodes", icon: Facebook, label: "Facebook" },
-                ].map(({ href, icon: Icon, label }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-3 border border-gray-300 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
-                    aria-label={label}
-                  >
-                    <Icon size={24} />
-                  </a>
-                ))}
-              </div>
-            </div>
+        <div className="rise rise-4">
+          <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-accent mb-2">
+            Elsewhere
+          </h2>
+          <div className="border-t border-line">
+            {socials.map(({ href, icon: Icon, label, handle }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center justify-between py-4 border-b border-line transition-colors hover:bg-surface px-1 md:px-4"
+              >
+                <span className="flex items-center gap-4">
+                  <Icon size={18} className="text-muted group-hover:text-accent transition-colors" />
+                  <span className="font-medium">{label}</span>
+                  <span className="font-mono text-xs text-muted hidden sm:inline">
+                    {handle}
+                  </span>
+                </span>
+                <ArrowUpRight
+                  size={16}
+                  className="text-muted transition-all group-hover:text-accent group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                />
+              </a>
+            ))}
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { getAllPosts, getPostBySlug } from '@/lib/blog';
-import { Calendar, Clock, ArrowLeft, User } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 
@@ -22,62 +22,66 @@ export async function generateMetadata({ params }: Props) {
   }
 
   return {
-    title: `${post.title} | Alok Sharma`,
+    title: post.title,
     description: post.description,
+    openGraph: {
+      title: post.title,
+      description: post.description,
+      type: 'article',
+      publishedTime: post.date,
+    },
   };
 }
 
 const mdxComponents = {
   h1: ({ children }: { children: React.ReactNode }) => (
-    <h1 className="text-3xl md:text-4xl font-bold mt-10 mb-4 text-gray-900 dark:text-white">{children}</h1>
+    <h1 className="font-display text-3xl md:text-4xl font-medium tracking-tight mt-10 mb-4">{children}</h1>
   ),
   h2: ({ children }: { children: React.ReactNode }) => (
-    <h2 className="text-2xl md:text-3xl font-bold mt-10 mb-4 text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2">{children}</h2>
+    <h2 className="font-display text-2xl md:text-3xl font-medium tracking-tight mt-10 mb-4 border-b border-line pb-2">{children}</h2>
   ),
   h3: ({ children }: { children: React.ReactNode }) => (
-    <h3 className="text-xl md:text-2xl font-semibold mt-8 mb-3 text-gray-900 dark:text-white">{children}</h3>
+    <h3 className="font-display text-xl md:text-2xl font-medium tracking-tight mt-8 mb-3">{children}</h3>
   ),
   p: ({ children }: { children: React.ReactNode }) => (
-    <p className="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed text-lg">{children}</p>
+    <p className="mb-6 leading-relaxed text-lg">{children}</p>
   ),
   ul: ({ children }: { children: React.ReactNode }) => (
-    <ul className="list-disc pl-6 mb-6 text-gray-700 dark:text-gray-300 space-y-2">{children}</ul>
+    <ul className="list-disc pl-6 mb-6 space-y-2 marker:text-accent">{children}</ul>
   ),
   ol: ({ children }: { children: React.ReactNode }) => (
-    <ol className="list-decimal pl-6 mb-6 text-gray-700 dark:text-gray-300 space-y-2">{children}</ol>
+    <ol className="list-decimal pl-6 mb-6 space-y-2 marker:text-accent">{children}</ol>
   ),
   li: ({ children }: { children: React.ReactNode }) => (
     <li className="text-lg leading-relaxed">{children}</li>
   ),
   a: ({ href, children }: { href?: string; children: React.ReactNode }) => (
-    <a href={href} className="text-blue-600 dark:text-blue-400 hover:underline font-medium">
+    <a href={href} className="link-slide text-accent font-medium pb-0.5">
       {children}
     </a>
   ),
   code: ({ children }: { children: React.ReactNode }) => (
-    <code className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-sm font-mono text-gray-800 dark:text-gray-200">
+    <code className="bg-surface border border-line px-1.5 py-0.5 rounded text-sm font-mono">
       {children}
     </code>
   ),
   pre: ({ children }: { children: React.ReactNode }) => (
-    <pre className="bg-gray-900 dark:bg-gray-950 text-gray-100 p-4 rounded-lg overflow-x-auto mb-6 text-sm">
+    <pre className="bg-ink text-paper p-5 rounded-xl overflow-x-auto mb-6 text-sm dark:bg-surface dark:text-ink dark:border dark:border-line">
       {children}
     </pre>
   ),
   blockquote: ({ children }: { children: React.ReactNode }) => (
-    <blockquote className="border-l-4 border-blue-500 pl-6 py-2 my-6 bg-blue-50 dark:bg-blue-900/20 rounded-r-lg">
+    <blockquote className="border-l-2 border-accent pl-6 py-1 my-6 font-display text-xl italic">
       {children}
     </blockquote>
   ),
   strong: ({ children }: { children: React.ReactNode }) => (
-    <strong className="font-bold text-gray-900 dark:text-white">{children}</strong>
+    <strong className="font-semibold">{children}</strong>
   ),
   em: ({ children }: { children: React.ReactNode }) => (
     <em className="italic">{children}</em>
   ),
-  hr: () => (
-    <hr className="my-8 border-gray-200 dark:border-gray-700" />
-  ),
+  hr: () => <hr className="my-10 border-line" />,
 };
 
 export default async function BlogPostPage({ params }: Props) {
@@ -89,49 +93,44 @@ export default async function BlogPostPage({ params }: Props) {
   }
 
   return (
-    <article className="py-12">
+    <article className="py-12 md:py-16">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <Link
           href="/blog"
-          className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 mb-8 transition-colors text-sm"
+          className="rise inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-muted hover:text-accent mb-10 transition-colors"
         >
-          <ArrowLeft size={16} />
-          Back to Blog
+          <ArrowLeft size={14} />
+          All posts
         </Link>
 
-        <header className="mb-10">
-          <h1 className="text-3xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white leading-tight">
-            {post.title}
-          </h1>
-          {post.description && (
-            <p className="text-xl text-gray-600 dark:text-gray-400 mb-6">
-              {post.description}
-            </p>
-          )}
-          <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 dark:text-gray-400 pb-6 border-b border-gray-200 dark:border-gray-700">
-            <span className="flex items-center gap-2">
-              <User size={16} />
-              {post.author}
-            </span>
-            <span className="flex items-center gap-2">
-              <Calendar size={16} />
+        <header className="mb-12">
+          <div className="rise rise-1 font-mono text-xs text-muted mb-5 flex flex-wrap gap-x-4 gap-y-1">
+            <span>{post.author}</span>
+            <span className="text-accent">·</span>
+            <time dateTime={post.date}>
               {new Date(post.date).toLocaleDateString('en-US', {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric',
               })}
-            </span>
-            <span className="flex items-center gap-2">
-              <Clock size={16} />
-              {post.readingTime}
-            </span>
+            </time>
+            <span className="text-accent">·</span>
+            <span>{post.readingTime}</span>
           </div>
+          <h1 className="rise rise-2 font-display text-4xl md:text-5xl font-medium tracking-tight leading-[1.05] mb-5 text-balance">
+            {post.title}
+          </h1>
+          {post.description && (
+            <p className="rise rise-3 text-xl text-muted leading-relaxed">
+              {post.description}
+            </p>
+          )}
           {post.tags.length > 0 && (
-            <div className="flex flex-wrap gap-2 mt-4">
+            <div className="rise rise-4 flex flex-wrap gap-x-4 mt-6 pt-6 border-t border-line">
               {post.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="text-sm px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full"
+                  className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted"
                 >
                   #{tag}
                 </span>
@@ -140,7 +139,7 @@ export default async function BlogPostPage({ params }: Props) {
           )}
         </header>
 
-        <div className="blog-content">
+        <div className="blog-content rise rise-5">
           <MDXRemote source={post.content} components={mdxComponents} />
         </div>
       </div>
