@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Github, Linkedin, Mail, Twitter, Instagram, Facebook, Youtube, ArrowUpRight } from "lucide-react";
+import { Github, Linkedin, Mail, Twitter, Instagram, Facebook, Youtube } from "lucide-react";
+import { LocalTime } from "./fx/LocalTime";
 
 const socialLinks = [
   { href: "https://x.com/FriendWhoCodes", icon: Twitter, label: "X (Twitter)" },
@@ -12,28 +13,36 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-line mt-16">
-      {/* Big invitation */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
-        <p data-reveal className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted mb-4">
-          Next step
+    <footer className="border-t border-line mt-20 overflow-hidden">
+      <div className="max-w-[92rem] mx-auto px-4 sm:px-6 lg:px-10 py-20 md:py-28 text-center">
+        <p data-reveal className="font-mono text-[11px] uppercase tracking-[0.25em] text-muted mb-8">
+          Got an idea? — Let&apos;s talk
         </p>
-        <Link data-reveal="2" href="/contact" className="group inline-block">
-          <span className="font-display text-4xl md:text-6xl font-medium tracking-tight text-balance transition-colors group-hover:text-accent group-hover:italic">
-            Let&apos;s build something
-            <ArrowUpRight
-              className="inline-block ml-2 mb-2 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
-              size={32}
-            />
+        <Link href="/contact" data-cursor="Hello" className="block" data-reveal="2">
+          <span className="fill-hover font-display font-bold uppercase tracking-tight leading-[0.95] text-[clamp(3rem,11vw,10rem)] block">
+            Let&apos;s build
+          </span>
+          <span className="fill-hover font-display font-bold uppercase tracking-tight leading-[0.95] text-[clamp(3rem,11vw,10rem)] block">
+            something
           </span>
         </Link>
+        <a
+          href="mailto:contact@friendwhocodes.com"
+          data-reveal="3"
+          className="link-slide inline-block mt-10 font-mono text-sm md:text-base text-muted hover:text-ink pb-1"
+        >
+          contact@friendwhocodes.com
+        </a>
       </div>
 
       <div className="border-t border-line">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="max-w-[92rem] mx-auto px-4 sm:px-6 lg:px-10 py-6 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="font-mono text-xs text-muted">
             © {new Date().getFullYear()} Alok Sharma · friendwhocodes
             <span className="text-accent">_</span>
+          </p>
+          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
+            India · <LocalTime />
           </p>
           <div className="flex items-center gap-4">
             {socialLinks.map(({ href, icon: Icon, label }) => (

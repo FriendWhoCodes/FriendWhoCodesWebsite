@@ -1,14 +1,22 @@
 import type { Metadata } from "next";
-import { Fraunces, Spline_Sans, Spline_Sans_Mono } from "next/font/google";
+import { Syne, Fraunces, Spline_Sans, Spline_Sans_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { RevealObserver } from "@/components/fx/RevealObserver";
+import { SmoothScroll } from "@/components/fx/SmoothScroll";
+import { Cursor } from "@/components/fx/Cursor";
+import { Preloader } from "@/components/fx/Preloader";
 
-const heading = Fraunces({
+const heading = Syne({
   subsets: ["latin"],
   variable: "--font-heading",
+});
+
+const serifAccent = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-serif-accent",
   axes: ["opsz", "SOFT", "WONK"],
 });
 
@@ -29,11 +37,11 @@ export const metadata: Metadata = {
     template: "%s | Friend Who Codes",
   },
   description:
-    "Alok Sharma — software engineer in India. I build web apps, Android apps, and AI-assisted tools, and write about how they get made.",
+    "Alok Sharma — senior software engineer in India. I build web apps, Android apps, and AI-assisted tools, and write about how they get made.",
   openGraph: {
     title: "Alok Sharma | Friend Who Codes",
     description:
-      "Software engineer in India. Web apps, Android apps, and AI-assisted tools.",
+      "Senior software engineer in India. Web apps, Android apps, and AI-assisted tools.",
     url: "https://friendwhocodes.com",
     siteName: "Friend Who Codes",
     type: "website",
@@ -54,10 +62,13 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${heading.variable} ${body.variable} ${code.variable}`}
+      className={`${heading.variable} ${serifAccent.variable} ${body.variable} ${code.variable}`}
     >
       <body className="font-sans antialiased min-h-screen flex flex-col bg-paper text-ink">
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+          <Preloader />
+          <SmoothScroll />
+          <Cursor />
           <RevealObserver />
           <Header />
           <main className="flex-1">{children}</main>

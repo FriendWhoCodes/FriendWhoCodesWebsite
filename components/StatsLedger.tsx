@@ -37,7 +37,7 @@ export function StatsLedger() {
         <dl className="grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
           {stats.map((stat, i) => (
             <div key={stat.label} data-reveal={String(i + 1)}>
-              <dd className="font-display text-5xl md:text-6xl font-medium tracking-tight tabular-nums mb-3">
+              <dd className="font-display font-bold text-5xl md:text-6xl tracking-tight tabular-nums mb-3">
                 <CountUp value={stat.value} suffix={stat.suffix} />
               </dd>
               <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-accent mb-1">
