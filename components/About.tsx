@@ -27,18 +27,13 @@ const skills = [
 export function About() {
   return (
     <section className="py-16 md:py-24">
-      <div className="max-w-[92rem] mx-auto px-4 sm:px-6 lg:px-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <p className="rise font-mono text-[11px] uppercase tracking-[0.22em] text-muted mb-4">
           About
         </p>
-        <h1 className="rise rise-1 font-display font-bold uppercase tracking-tight leading-[0.95] text-[clamp(2.6rem,7vw,5.5rem)] mb-14 max-w-4xl">
-          Ten years of
-          <br />
-          <span className="text-outline">systems</span>
-          <em className="font-serif italic normal-case text-accent font-medium">
-            {" "}
-            &amp; shipping.
-          </em>
+        <h1 className="rise rise-1 font-display text-4xl md:text-6xl font-medium tracking-tight mb-14 max-w-2xl text-balance">
+          Ten years of systems{" "}
+          <em className="italic text-accent">&amp; shipping.</em>
         </h1>
 
         <div className="grid md:grid-cols-3 gap-12 md:gap-16">
@@ -49,7 +44,7 @@ export function About() {
               Atlan, Confluent and Sumo Logic.
             </p>
             <p className="text-muted text-lg leading-relaxed">
-              Most recently I built an AI SRE agent on the Anthropic SDK that
+              Most recently I built the AI SRE Suite of Agents on the Anthropic SDK that
               handles incident detection, investigation and remediation on its
               own — 95% autonomous resolution across a 650-tenant Kubernetes
               fleet, cutting P90 incident mitigation from 3+ hours to under 15
@@ -81,7 +76,6 @@ export function About() {
                 href="/Alok-Sharma-Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                data-cursor="PDF"
                 className="group inline-flex items-center gap-2 px-6 py-3 bg-accent text-accent-ink font-mono text-sm uppercase tracking-[0.12em] rounded-full transition-transform hover:-translate-y-0.5"
               >
                 <FileDown size={16} />

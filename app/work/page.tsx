@@ -8,9 +8,9 @@ export const metadata = {
 
 const professional = [
   {
-    title: "AI SRE Agent",
+    title: "AI SRE Suite of Agents",
     description:
-      "Autonomous incident detection, investigation and remediation on the Anthropic SDK — 40+ skills, 15+ data-source integrations, dynamic runtime skill selection. 95% autonomous resolution across 150 host clusters and 650 tenants. Built at Atlan, 2025.",
+      "Suite of autonomous agents for incident detection, investigation and remediation on the Anthropic SDK — 40+ skills, 15+ data-source integrations, dynamic runtime skill selection. 95% autonomous resolution across 150 host clusters and 650 tenants. Built at Atlan, 2025.",
     tech: ["Anthropic SDK", "Kubernetes", "VictoriaMetrics", "ClickHouse"],
     status: "live" as const,
   },
@@ -105,14 +105,12 @@ function Section({
 export default function WorkPage() {
   return (
     <section className="py-16 md:py-24">
-      <div className="max-w-[92rem] mx-auto px-4 sm:px-6 lg:px-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <p className="rise font-mono text-[11px] uppercase tracking-[0.22em] text-muted mb-4">
           The work
         </p>
-        <h1 className="rise rise-1 font-display font-bold uppercase tracking-tight leading-[0.95] text-[clamp(2.6rem,7vw,5.5rem)] mb-4">
-          Systems &<br />
-          <span className="text-outline">side quests</span>
-          <em className="font-serif italic normal-case text-accent font-medium">.</em>
+        <h1 className="rise rise-1 font-display text-4xl md:text-6xl font-medium tracking-tight mb-4">
+          Systems <em className="italic text-accent">&amp; side quests.</em>
         </h1>
         <p className="rise rise-2 text-muted text-lg max-w-xl mb-14 leading-relaxed">
           A decade of professional systems at Atlan, Confluent and Sumo Logic

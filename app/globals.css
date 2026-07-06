@@ -4,31 +4,31 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* ————————————————————————————————
-   Design tokens — v3 "night studio"
-   Cinematic dark, ember accent, kinetic type
+   Design tokens — "engineer's notebook"
+   Warm paper + ink + one signal accent
    ———————————————————————————————— */
 :root {
   --paper: #f5f1e8;
-  --surface: #ece6d8;
-  --ink: #16120c;
+  --surface: #fdfbf5;
+  --ink: #1c1813;
   --muted: #6f6557;
-  --line: #ddd4c2;
+  --line: #e0d8c8;
   --line-strong: #c9bfab;
-  --accent: #d8481c;
+  --accent: #c8441a;
   --accent-ink: #ffffff;
   --live: #3d7a45;
   color-scheme: light;
 }
 
 .dark {
-  --paper: #0e0c09;
-  --surface: #171410;
-  --ink: #f2ead9;
-  --muted: #8f8574;
-  --line: #262119;
-  --line-strong: #3e352a;
-  --accent: #ff5a1f;
-  --accent-ink: #160903;
+  --paper: #131009;
+  --surface: #1c1812;
+  --ink: #ece4d3;
+  --muted: #9c9080;
+  --line: #2b2519;
+  --line-strong: #453a26;
+  --accent: #ff6b3b;
+  --accent-ink: #1c0d04;
   --live: #7fbf87;
   color-scheme: dark;
 }
@@ -44,30 +44,29 @@
   --color-accent-ink: var(--accent-ink);
   --color-live: var(--live);
   --font-sans: var(--font-body), "Helvetica Neue", sans-serif;
-  --font-display: var(--font-heading), "Arial Black", sans-serif;
-  --font-serif: var(--font-serif-accent), Georgia, serif;
+  --font-display: var(--font-heading), Georgia, serif;
   --font-mono: var(--font-code), "SF Mono", monospace;
 }
 
 html {
   background: var(--paper);
+  scroll-behavior: smooth;
 }
 
 body {
   color: var(--ink);
   background: var(--paper);
   font-family: var(--font-body), "Helvetica Neue", sans-serif;
-  overflow-x: clip;
 }
 
-/* Film grain */
+/* Paper grain */
 body::after {
   content: "";
   position: fixed;
   inset: 0;
-  z-index: 80;
+  z-index: 60;
   pointer-events: none;
-  opacity: 0.4;
+  opacity: 0.35;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0.05'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
@@ -76,35 +75,7 @@ body::after {
   color: var(--accent-ink);
 }
 
-/* ————————— Kinetic type ————————— */
-.text-outline {
-  color: transparent;
-  -webkit-text-stroke: 1.5px var(--ink);
-}
-.text-outline-accent {
-  color: transparent;
-  -webkit-text-stroke: 1.5px var(--accent);
-}
-
-/* Line clip reveal (hero) */
-.clip-line {
-  display: block;
-  overflow: hidden;
-}
-.clip-line > span {
-  display: block;
-  transform: translateY(110%) rotate(2deg);
-  animation: line-up 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  transform-origin: left bottom;
-  will-change: transform;
-}
-@keyframes line-up {
-  to {
-    transform: translateY(0) rotate(0deg);
-  }
-}
-
-/* ————————— Motion primitives ————————— */
+/* ————————— Motion ————————— */
 @keyframes rise {
   from {
     opacity: 0;
@@ -115,6 +86,7 @@ body::after {
     transform: none;
   }
 }
+
 .rise {
   animation: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
@@ -124,12 +96,26 @@ body::after {
 .rise-4 { animation-delay: 0.3s; }
 .rise-5 { animation-delay: 0.4s; }
 
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee 40s linear infinite;
+}
+.marquee-hover:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Scroll reveal: elements with [data-reveal] rise in on first view */
 [data-reveal] {
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(26px);
   transition:
-    opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
 }
 [data-reveal="2"] { transition-delay: 0.08s; }
 [data-reveal="3"] { transition-delay: 0.16s; }
@@ -140,21 +126,83 @@ body::after {
   transform: none;
 }
 
+/* Hero headline: word-by-word mask reveal */
+.word-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+.word-mask > span {
+  display: inline-block;
+  transform: translateY(115%);
+  animation: word-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes word-up {
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* Dot field: slow breathing cells */
+@keyframes cell-breathe {
+  0%, 100% { opacity: inherit; }
+  50% { opacity: 0.06; }
+}
+.dotfield-cell {
+  animation: cell-breathe 6s ease-in-out infinite;
+}
+
+/* Project rows: cursor-following ink spotlight */
+.spotlight {
+  position: relative;
+}
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  background: radial-gradient(
+    340px circle at var(--mx, 50%) var(--my, 50%),
+    color-mix(in srgb, var(--accent) 7%, transparent),
+    transparent 70%
+  );
+  pointer-events: none;
+}
+.spotlight:hover::before {
+  opacity: 1;
+}
+
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.25; }
 }
+
 .dot-live {
   animation: blink 2.4s ease-in-out infinite;
 }
 
-@keyframes spin-slow {
-  to {
-    transform: rotate(360deg);
+@media (prefers-reduced-motion: reduce) {
+  .rise,
+  .marquee-track,
+  .dot-live,
+  .word-mask > span,
+  .dotfield-cell {
+    animation: none;
   }
-}
-.spin-slow {
-  animation: spin-slow 14s linear infinite;
+  .word-mask > span {
+    transform: none;
+  }
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 /* Underline-slide links */
@@ -167,121 +215,6 @@ body::after {
 }
 .link-slide:hover {
   background-size: 100% 1.5px;
-}
-
-/* Fill-on-hover giant text (footer) */
-.fill-hover {
-  color: transparent;
-  -webkit-text-stroke: 1.5px var(--ink);
-  background-image: linear-gradient(var(--accent), var(--accent));
-  background-size: 100% 0%;
-  background-position: 0 100%;
-  background-repeat: no-repeat;
-  -webkit-background-clip: text;
-  background-clip: text;
-  transition: background-size 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.fill-hover:hover {
-  background-size: 100% 100%;
-}
-
-/* ————————— Custom cursor ————————— */
-@media (hover: hover) and (pointer: fine) {
-  .cursor-dot {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 100;
-    width: 12px;
-    height: 12px;
-    border-radius: 999px;
-    background: var(--accent);
-    pointer-events: none;
-    transform: translate(-50%, -50%);
-    transition:
-      width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-      height 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-      background 0.3s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    will-change: left, top;
-  }
-  .cursor-dot.is-label {
-    width: 88px;
-    height: 88px;
-    background: var(--accent);
-  }
-  .cursor-dot .cursor-text {
-    opacity: 0;
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent-ink);
-    transition: opacity 0.2s 0.1s;
-  }
-  .cursor-dot.is-label .cursor-text {
-    opacity: 1;
-  }
-}
-@media (hover: none), (pointer: coarse) {
-  .cursor-dot {
-    display: none;
-  }
-}
-
-/* ————————— Preloader ————————— */
-.preloader {
-  position: fixed;
-  inset: 0;
-  z-index: 200;
-  background: #0e0c09;
-  color: #f2ead9;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.9s cubic-bezier(0.76, 0, 0.24, 1);
-}
-.preloader.done {
-  transform: translateY(-100%);
-}
-
-/* ————————— Project stack ————————— */
-.stack-card {
-  position: sticky;
-  top: 12vh;
-  border-radius: 24px;
-  overflow: hidden;
-  transform-origin: center top;
-}
-
-/* Marquee */
-.marquee-row {
-  white-space: nowrap;
-  will-change: transform;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .rise,
-  .dot-live,
-  .spin-slow,
-  .clip-line > span {
-    animation: none;
-  }
-  .clip-line > span {
-    transform: none;
-  }
-  [data-reveal] {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-  .preloader {
-    display: none;
-  }
-  .cursor-dot {
-    display: none;
-  }
 }
 
 @layer utilities {

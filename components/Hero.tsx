@@ -1,104 +1,120 @@
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { DotField } from "./DotField";
+import { Magnetic } from "./fx/Magnetic";
 
-function RotatingBadge() {
+const marqueeItems = [
+  "Next.js",
+  "TypeScript",
+  "Android",
+  "Kotlin",
+  "AI agents",
+  "Python",
+  "Postgres",
+  "Tailwind",
+];
+
+function MaskedWords({
+  text,
+  baseDelay = 0,
+  className = "",
+}: {
+  text: string;
+  baseDelay?: number;
+  className?: string;
+}) {
   return (
-    <Link
-      href="/contact"
-      aria-label="Open to interesting work — contact"
-      className="group relative block w-32 h-32 md:w-40 md:h-40"
-      data-cursor="Say hi"
-    >
-      <svg viewBox="0 0 100 100" className="spin-slow w-full h-full">
-        <defs>
-          <path
-            id="circ"
-            d="M 50,50 m -38,0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0"
-          />
-        </defs>
-        <text className="fill-ink font-mono uppercase" style={{ fontSize: 6.8, letterSpacing: "0.14em" }}>
-          <textPath href="#circ">
-            open to staff-level work · ships things ·
-          </textPath>
-        </text>
-      </svg>
-      <span className="absolute inset-0 flex items-center justify-center">
-        <span className="w-3 h-3 rounded-full bg-live dot-live transition-transform group-hover:scale-150" />
-      </span>
-    </Link>
+    <span className={className}>
+      {text.split(" ").map((word, i) => (
+        <span key={i}>
+          <span className="word-mask">
+            <span style={{ animationDelay: `${baseDelay + i * 0.09}s` }}>
+              {word}
+            </span>
+          </span>
+          {i < text.split(" ").length - 1 && " "}
+        </span>
+      ))}
+    </span>
   );
 }
 
 export function Hero() {
   return (
-    <section className="relative min-h-[92svh] flex flex-col justify-between overflow-hidden">
-      <div className="max-w-[92rem] mx-auto w-full px-4 sm:px-6 lg:px-10 pt-14 md:pt-20 flex-1 flex flex-col justify-center">
-        <div className="flex items-start justify-between gap-8">
-          <p className="rise font-mono text-[11px] md:text-xs uppercase tracking-[0.25em] text-muted max-w-64 leading-loose">
-            Alok Sharma
-            <br />
-            senior software engineer 2
-            <br />
-            10+ years · India · remote
-          </p>
-          <div className="rise rise-2 hidden md:block">
-            <RotatingBadge />
-          </div>
+    <section className="relative overflow-hidden">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 md:pt-32 md:pb-24 relative">
+        {/* Contribution-graph dot field, fading into the paper */}
+        <div
+          aria-hidden
+          className="pointer-events-none select-none absolute -right-16 top-6 hidden lg:block [mask-image:radial-gradient(ellipse_75%_75%_at_70%_40%,black_30%,transparent_72%)]"
+        >
+          <DotField />
         </div>
 
-        <h1 className="mt-8 md:mt-4 font-display font-bold uppercase leading-[0.92] tracking-tight">
-          <span className="clip-line">
-            <span
-              style={{ animationDelay: "0.15s" }}
-              className="text-[clamp(3.4rem,12.5vw,11.5rem)]"
-            >
-              Your friend
-            </span>
-          </span>
-          <span className="clip-line">
-            <span
-              style={{ animationDelay: "0.3s" }}
-              className="text-[clamp(3.4rem,12.5vw,11.5rem)]"
-            >
-              <span className="text-outline">who</span>{" "}
-              <em className="font-serif italic font-medium normal-case text-accent tracking-normal">
-                codes
-              </em>
-              <span className="text-accent">.</span>
-            </span>
-          </span>
+        <p className="rise font-mono text-[11px] uppercase tracking-[0.22em] text-muted mb-6">
+          Alok Sharma — senior software engineer, India
+        </p>
+
+        <h1 className="font-display font-medium tracking-tight text-[clamp(3rem,9vw,6.5rem)] leading-[0.98] mb-8">
+          <MaskedWords text="Your friend" baseDelay={0.1} />
+          <br />
+          <MaskedWords
+            text="who codes."
+            baseDelay={0.32}
+            className="text-accent italic"
+          />
         </h1>
 
-        <div className="mt-10 md:mt-14 flex flex-wrap items-end justify-between gap-8">
-          <p className="rise rise-4 text-lg md:text-xl text-muted max-w-xl leading-relaxed">
-            Ten years deep in distributed systems and observability — Atlan,
-            Confluent, Sumo Logic. Lately: AI agents that run incident
-            response on their own.
-          </p>
-          <div className="rise rise-5 flex items-center gap-8">
+        <p className="rise rise-3 text-lg md:text-xl text-muted max-w-xl leading-relaxed mb-10">
+          Ten-plus years building distributed systems and observability
+          platforms at Atlan, Confluent and Sumo Logic — lately, AI agents
+          that run incident response on their own.
+        </p>
+
+        <div className="rise rise-4 flex flex-wrap items-center gap-6">
+          <Magnetic>
             <Link
               href="/work"
-              data-cursor="Work"
-              className="link-slide font-mono text-sm uppercase tracking-[0.15em] pb-1"
+              className="group inline-flex items-center gap-2 px-6 py-3 bg-accent text-accent-ink font-mono text-sm uppercase tracking-[0.12em] rounded-full"
             >
-              Selected work
+              See the work
+              <ArrowRight
+                size={16}
+                className="transition-transform group-hover:translate-x-1"
+              />
             </Link>
-            <Link
-              href="/contact"
-              data-cursor="Hello"
-              className="link-slide font-mono text-sm uppercase tracking-[0.15em] pb-1 text-accent"
-            >
-              Contact
-            </Link>
-          </div>
+          </Magnetic>
+          <Link
+            href="/contact"
+            className="link-slide font-mono text-sm uppercase tracking-[0.12em] text-ink pb-0.5"
+          >
+            Get in touch
+          </Link>
         </div>
-      </div>
 
-      <div className="rise rise-5 max-w-[92rem] mx-auto w-full px-4 sm:px-6 lg:px-10 pb-8 mt-16 flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.2em] text-muted">
-        <span className="flex items-center gap-2.5">
+        <p className="rise rise-5 mt-14 flex items-center gap-2.5 font-mono text-xs text-muted">
           <span className="dot-live inline-block w-2 h-2 rounded-full bg-live" />
           Now: AI SRE agents at Atlan · Focus Empire after hours
-        </span>
-        <span className="hidden sm:block">Scroll ↓</span>
+        </p>
+      </div>
+
+      {/* Tech marquee */}
+      <div className="rise rise-5 marquee-hover border-y border-line py-3 overflow-hidden">
+        <div className="marquee-track flex w-max whitespace-nowrap">
+          {[0, 1].map((copy) => (
+            <div key={copy} aria-hidden={copy === 1} className="flex">
+              {marqueeItems.map((item) => (
+                <span
+                  key={`${copy}-${item}`}
+                  className="font-mono text-xs uppercase tracking-[0.2em] text-muted px-8 flex items-center gap-8"
+                >
+                  {item}
+                  <span className="text-accent">·</span>
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
