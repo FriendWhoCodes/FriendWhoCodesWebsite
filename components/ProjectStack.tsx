@@ -12,13 +12,21 @@ interface StackProject {
 
 const projects: StackProject[] = [
   {
+    title: "AI SRE Agent",
+    description:
+      "Autonomous incident detection, investigation and remediation on the Anthropic SDK — 40+ skills, 15+ integrations, 95% autonomous resolution across 650 tenants. Built at Atlan.",
+    tech: ["Anthropic SDK", "Kubernetes", "VictoriaMetrics", "ClickHouse"],
+    status: "live",
+    tint: "var(--accent)",
+  },
+  {
     title: "Goal Setter",
     description:
-      "Free 2026 goal-setting tool under the Man of Wisdom banner. Set goals, break them down, track the year.",
+      "AI-powered goal-tracking web app — designed, built, and deployed end-to-end. Free to use.",
     tech: ["Next.js", "TypeScript", "Tailwind"],
     href: "https://goals.manofwisdom.co/",
     status: "live",
-    tint: "var(--accent)",
+    tint: "var(--live)",
   },
   {
     title: "AstroFacts",
@@ -27,14 +35,6 @@ const projects: StackProject[] = [
     tech: ["Android", "Kotlin"],
     href: "https://play.google.com/store/apps/details?id=com.friendwhocodes.astrofacts",
     status: "live",
-    tint: "var(--live)",
-  },
-  {
-    title: "Focus Empire",
-    description:
-      "Build your focus empire one session at a time. Gamified productivity, in active development.",
-    tech: ["Android", "Kotlin"],
-    status: "upcoming",
     tint: "var(--line-strong)",
   },
 ];
@@ -122,7 +122,7 @@ export function ProjectStack() {
           </em>
         </h2>
         <Link
-          href="/portfolio"
+          href="/work"
           data-cursor="All"
           className="link-slide font-mono text-xs uppercase tracking-[0.18em] text-muted hover:text-ink pb-1 hidden sm:block"
         >

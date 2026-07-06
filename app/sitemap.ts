@@ -4,7 +4,7 @@ import { getAllPosts } from "@/lib/blog";
 const BASE = "https://friendwhocodes.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticRoutes = ["", "/about", "/portfolio", "/products", "/blog", "/contact"].map(
+  const staticRoutes = ["", "/about", "/work", "/blog", "/contact"].map(
     (path) => ({
       url: `${BASE}${path}`,
       lastModified: new Date(),

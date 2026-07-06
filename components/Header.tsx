@@ -10,9 +10,8 @@ import { LocalTime } from "./fx/LocalTime";
 const navItems = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
-  { href: "/portfolio", label: "Work" },
-  { href: "/products", label: "Products" },
-  { href: "/blog", label: "Blog" },
+  { href: "/work", label: "Work" },
+  { href: "/blog", label: "Writing" },
   { href: "/contact", label: "Contact" },
 ];
 

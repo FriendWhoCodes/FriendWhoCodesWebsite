@@ -4,5 +4,4 @@ export { ThemeToggle } from "./ThemeToggle";
 export { Hero } from "./Hero";
 export { ProjectCard } from "./ProjectCard";
 export { About } from "./About";
-export { Portfolio } from "./Portfolio";
 export { Contact } from "./Contact";
