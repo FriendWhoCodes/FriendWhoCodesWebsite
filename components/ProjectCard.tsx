@@ -1,4 +1,13 @@
+"use client";
+
 import { Github, ArrowUpRight } from "lucide-react";
+
+function trackSpotlight(e: React.MouseEvent<HTMLElement>) {
+  const el = e.currentTarget;
+  const r = el.getBoundingClientRect();
+  el.style.setProperty("--mx", `${e.clientX - r.left}px`);
+  el.style.setProperty("--my", `${e.clientY - r.top}px`);
+}
 
 interface ProjectCardProps {
   title: string;
@@ -29,7 +38,8 @@ export function ProjectCard({
   return (
     <Wrapper
       {...wrapperProps}
-      className="group relative block border-b border-line py-8 md:py-10 transition-colors hover:bg-surface"
+      onMouseMove={trackSpotlight}
+      className="spotlight group relative block border-b border-line py-8 md:py-10 transition-colors hover:bg-surface"
     >
       <div className="grid md:grid-cols-[4rem_1fr_auto] gap-4 md:gap-8 items-baseline px-1 md:px-4">
         {index !== undefined && (

@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { RevealObserver } from "@/components/fx/RevealObserver";
 
 const heading = Fraunces({
   subsets: ["latin"],
@@ -57,6 +58,7 @@ export default function RootLayout({
     >
       <body className="font-sans antialiased min-h-screen flex flex-col bg-paper text-ink">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <RevealObserver />
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />

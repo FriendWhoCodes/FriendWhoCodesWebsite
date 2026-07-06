@@ -33,7 +33,7 @@ export function FeaturedProjects() {
     <section className="py-16 md:py-24">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-end mb-4 md:mb-6">
-          <div>
+          <div data-reveal>
             <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted mb-3">
               01 — Selected work
             </p>
@@ -53,7 +53,7 @@ export function FeaturedProjects() {
           </Link>
         </div>
 
-        <div className="border-t border-line">
+        <div data-reveal="2" className="border-t border-line">
           {featuredProjects.map((project, i) => (
             <ProjectCard key={project.title} {...project} index={i} />
           ))}

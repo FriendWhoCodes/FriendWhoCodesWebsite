@@ -1,5 +1,6 @@
 const facts = [
   { label: "Based in", value: "India (remote)" },
+  { label: "Experience", value: "8+ years, senior software engineer" },
   { label: "Focus", value: "Web · Android · AI tools" },
   { label: "Currently", value: "Building Focus Empire" },
   { label: "Contact", value: "contact@friendwhocodes.com" },
@@ -30,14 +31,27 @@ export function About() {
         <div className="grid md:grid-cols-3 gap-12 md:gap-16">
           <div className="rise rise-2 md:col-span-2 space-y-6">
             <p className="text-xl leading-relaxed">
-              I&apos;m Alok Sharma, a software developer based in India, working
-              remotely and shipping my own products on the side.
+              I&apos;m Alok Sharma, a senior software engineer based in India
+              — eight-plus years of engineering by day, my own products on the
+              side.
             </p>
             <p className="text-muted text-lg leading-relaxed">
               I build across the stack — web apps in Next.js and TypeScript,
               Android apps in Kotlin, and increasingly tools where AI does part
               of the work. I care about clean code, honest products, and
               actually finishing things.
+            </p>
+            <p className="text-muted text-lg leading-relaxed">
+              The open half of my work lives at{" "}
+              <a
+                href="https://github.com/FriendWhoCodes"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link-slide text-accent pb-0.5"
+              >
+                github.com/FriendWhoCodes
+              </a>
+              .
             </p>
 
             <div className="pt-6">

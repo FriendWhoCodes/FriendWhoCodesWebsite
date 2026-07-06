@@ -15,11 +15,11 @@ export function Footer() {
     <footer className="border-t border-line mt-16">
       {/* Big invitation */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
-        <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted mb-4">
+        <p data-reveal className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted mb-4">
           Next step
         </p>
-        <Link href="/contact" className="group inline-block">
-          <span className="font-display text-4xl md:text-6xl font-medium tracking-tight text-balance group-hover:text-accent transition-colors">
+        <Link data-reveal="2" href="/contact" className="group inline-block">
+          <span className="font-display text-4xl md:text-6xl font-medium tracking-tight text-balance transition-colors group-hover:text-accent group-hover:italic">
             Let&apos;s build something
             <ArrowUpRight
               className="inline-block ml-2 mb-2 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"

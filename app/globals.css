@@ -105,6 +105,75 @@ body::after {
 .marquee-track {
   animation: marquee 40s linear infinite;
 }
+.marquee-hover:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Scroll reveal: elements with [data-reveal] rise in on first view */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+[data-reveal="2"] { transition-delay: 0.08s; }
+[data-reveal="3"] { transition-delay: 0.16s; }
+[data-reveal="4"] { transition-delay: 0.24s; }
+[data-reveal="5"] { transition-delay: 0.32s; }
+[data-reveal].in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Hero headline: word-by-word mask reveal */
+.word-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+.word-mask > span {
+  display: inline-block;
+  transform: translateY(115%);
+  animation: word-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes word-up {
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* Dot field: slow breathing cells */
+@keyframes cell-breathe {
+  0%, 100% { opacity: inherit; }
+  50% { opacity: 0.06; }
+}
+.dotfield-cell {
+  animation: cell-breathe 6s ease-in-out infinite;
+}
+
+/* Project rows: cursor-following ink spotlight */
+.spotlight {
+  position: relative;
+}
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  background: radial-gradient(
+    340px circle at var(--mx, 50%) var(--my, 50%),
+    color-mix(in srgb, var(--accent) 7%, transparent),
+    transparent 70%
+  );
+  pointer-events: none;
+}
+.spotlight:hover::before {
+  opacity: 1;
+}
 
 @keyframes blink {
   0%, 100% { opacity: 1; }
@@ -118,8 +187,18 @@ body::after {
 @media (prefers-reduced-motion: reduce) {
   .rise,
   .marquee-track,
-  .dot-live {
+  .dot-live,
+  .word-mask > span,
+  .dotfield-cell {
     animation: none;
+  }
+  .word-mask > span {
+    transform: none;
+  }
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
   html {
     scroll-behavior: auto;
