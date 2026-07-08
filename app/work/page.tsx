@@ -1,9 +1,18 @@
+import type { Metadata } from "next";
 import { ProjectCard } from "@/components/ProjectCard";
 
-export const metadata = {
+const description =
+  "Systems shipped professionally at Atlan, Confluent and Sumo Logic, plus products built and shipped independently.";
+
+export const metadata: Metadata = {
   title: "Work",
-  description:
-    "Systems shipped professionally at Atlan, Confluent and Sumo Logic, plus products built and shipped independently.",
+  description,
+  alternates: { canonical: "/work" },
+  openGraph: {
+    title: "Work | Friend Who Codes",
+    description,
+    url: "/work",
+  },
 };
 
 const professional = [

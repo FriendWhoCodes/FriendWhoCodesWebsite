@@ -1,10 +1,20 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getAllPosts } from '@/lib/blog';
 import { ArrowUpRight } from 'lucide-react';
 
-export const metadata = {
+const description =
+  'Notes from Alok Sharma on software engineering, shipping products, and what he learns building them.';
+
+export const metadata: Metadata = {
   title: 'Blog',
-  description: 'Thoughts on software development, technology, and building products.',
+  description,
+  alternates: { canonical: '/blog' },
+  openGraph: {
+    title: 'Blog | Friend Who Codes',
+    description,
+    url: '/blog',
+  },
 };
 
 export default function BlogPage() {

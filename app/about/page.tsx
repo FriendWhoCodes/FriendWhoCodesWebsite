@@ -1,8 +1,18 @@
+import type { Metadata } from "next";
 import { About } from "@/components/About";
 
-export const metadata = {
+const description =
+  "About Alok Sharma — a software engineer with 10+ years across distributed systems, observability and AI agents, built at Atlan, Confluent and Sumo Logic.";
+
+export const metadata: Metadata = {
   title: "About",
-  description: "Learn more about Alok Sharma - Software Developer",
+  description,
+  alternates: { canonical: "/about" },
+  openGraph: {
+    title: "About | Friend Who Codes",
+    description,
+    url: "/about",
+  },
 };
 
 export default function AboutPage() {
