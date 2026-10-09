@@ -32,7 +32,7 @@ export default function HoldYourHorsesPrivacyPage() {
       <h1 className="font-display text-3xl md:text-4xl font-medium tracking-tight mt-10 mb-4">
         Hold Your Horses: Privacy Policy
       </h1>
-      <P>Last updated: 8 October 2026</P>
+      <P>Last updated: 9 October 2026</P>
       <P>
         Hold Your Horses is a game published on Google Play by Friend Who Codes (&ldquo;we&rdquo;). This policy explains
         what data the game handles.
@@ -40,9 +40,10 @@ export default function HoldYourHorsesPrivacyPage() {
 
       <H2>What stays on your phone</H2>
       <P>
-        Your best times, the horses and worlds you have unlocked, your sound setting and your purchases (&ldquo;No
-        Ads&rdquo; or &ldquo;Pro&rdquo;) are stored only on your device. The game has no accounts and we run no servers
-        for it, so we never receive this data.
+        Your best times (overall and in each world), your Race stars, your play counts, the horses and worlds you have
+        unlocked, your sound setting and your purchases (&ldquo;No Ads&rdquo; or &ldquo;Pro&rdquo;) are stored only on
+        your device. The game has no accounts and we run no servers for it, so we never receive this data. The one
+        exception is what you choose to send to Google Play Games, described below.
       </P>
 
       <H2>Ads</H2>
@@ -66,6 +67,15 @@ export default function HoldYourHorsesPrivacyPage() {
       <P>
         &ldquo;No Ads&rdquo; and &ldquo;Pro&rdquo; are sold through Google Play. Google processes the payment; we only
         receive confirmation that a purchase happened, never your payment details.
+      </P>
+
+      <H2>Leaderboards and achievements</H2>
+      <P>
+        If you are signed in to Google Play Games, the game sends your best Herd survival time, your total Race stars
+        and the achievements you unlock to Google Play Games, where they are shown with your Play Games gamer name on
+        the leaderboards. Google handles this data under its own privacy policy; we don&rsquo;t receive or store it.
+        Signing in is optional and the game works fully without it. You can manage your Play Games profile and its
+        data in the Play Games app.
       </P>
 
       <H2>Sharing and invites</H2>
