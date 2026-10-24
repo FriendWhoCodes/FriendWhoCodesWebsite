@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 # Least privilege for the job token; the deploy only needs the SSH secrets.
 permissions:
@@ -25,10 +26,6 @@ jobs:
           host: ${{ secrets.HETZNER_HOST }}
           username: ${{ secrets.HETZNER_USER }}
           key: ${{ secrets.HETZNER_SSH_KEY }}
-          script: |
-            cd /var/www/friendwhocodes
-            git fetch origin main
-            git reset --hard origin/main
-            npm install
-            npm run build
-            pm2 restart friendwhocodes || pm2 start npm --name "friendwhocodes" -- start
+          # The key only lets user 'ci' run the server's /usr/local/sbin/ci-deploy dispatcher,
+          # which reads the token below and runs the fixed deploy steps for that app.
+          script: echo ci-deploy:friendwhocodes
